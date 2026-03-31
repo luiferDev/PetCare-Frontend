@@ -78,14 +78,14 @@ export function SitterSearchBar({ placeholder = "Buscar cuidadores...", classNam
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onFocus={() => setIsOpen(true)}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500"
+                    className="w-full pl-12 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white dark:placeholder-gray-400 rounded-xl focus:ring-2 focus:ring-orange-500"
                 />
             </div>
 
             {isOpen && (suggestions.length > 0 || isLoadingSuggestions) && (
-                <div className="absolute top-full w-full mt-1 bg-white border rounded-xl shadow-lg z-10 max-h-60 overflow-y-auto">
+                <div className="absolute top-full w-full mt-1 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-xl shadow-lg z-10 max-h-60 overflow-y-auto">
                     {isLoadingSuggestions ? (
-                        <div className="p-4 text-center text-sm text-gray-500">Buscando...</div>
+                        <div className="p-4 text-center text-sm text-gray-500 dark:text-gray-400">Buscando...</div>
                     ) : (
                         suggestions.map((suggestion, index) => {
                             const Icon = suggestion.icon;
@@ -93,10 +93,10 @@ export function SitterSearchBar({ placeholder = "Buscar cuidadores...", classNam
                                 <button
                                     key={index}
                                     onClick={() => handleSuggestionClick(suggestion)}
-                                    className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center gap-3"
+                                    className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 flex items-center gap-3"
                                 >
                                     <Icon className="w-4 h-4 text-gray-400" />
-                                    <span className="text-sm text-gray-700">{suggestion.label}</span>
+                                    <span className="text-sm text-gray-700 dark:text-gray-300">{suggestion.label}</span>
                                 </button>
                             );
                         })

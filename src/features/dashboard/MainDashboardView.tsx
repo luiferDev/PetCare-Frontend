@@ -112,7 +112,7 @@ export default function MainDashboardView({
 
 	const handlePetSelect = (petId: string) => {
 		if (onPetSelect) onPetSelect(petId);
-		navigate(`/dashboard/pet-profile/${petId}`);
+		navigate(`/dashboard/pets/${petId}`);
 	};
 
 	const handleRetry = () => {
@@ -120,13 +120,12 @@ export default function MainDashboardView({
 		refetch();
 	};
 
-	// Loading state con skeleton mejorado
 	if (isLoading) {
 		return (
 			<div
-				className={`grid grid-cols-1 xl:grid-cols-10 gap-8 ${className}`}
+				className={`grid grid-cols-1 lg:grid-cols-10 gap-8 ${className}`}
 			>
-				<div className="xl:col-span-7 space-y-8">
+				<div className="lg:col-span-7 space-y-8">
 					{/* Hero Banner Skeleton */}
 					<div className="bg-gradient-to-r from-gray-200 to-gray-300 rounded-2xl h-64 animate-pulse shadow-sm"></div>
 
@@ -161,7 +160,7 @@ export default function MainDashboardView({
 								<div className="h-4 bg-gray-200 rounded w-32"></div>
 							</div>
 						</div>
-						<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 							{[1, 2, 3].map((i) => (
 								<div
 									key={i}
@@ -190,7 +189,7 @@ export default function MainDashboardView({
 					{/* Quick Actions Skeleton */}
 					<div className="space-y-6">
 						<div className="h-6 bg-gray-200 rounded w-40"></div>
-						<div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+						<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 							{[1, 2, 3, 4].map((i) => (
 								<div
 									key={i}
@@ -205,7 +204,7 @@ export default function MainDashboardView({
 				</div>
 
 				{/* Sidebar Skeleton */}
-				<div className="xl:col-span-3 space-y-6">
+				<div className="lg:col-span-3 space-y-6">
 					{[1, 2, 3, 4].map((i) => (
 						<div
 							key={i}
@@ -261,9 +260,9 @@ export default function MainDashboardView({
 	}
 
 	return (
-		<div className={`grid grid-cols-1 xl:grid-cols-10 gap-8 ${className}`}>
+		<div className={`grid grid-cols-1 lg:grid-cols-10 gap-8 ${className}`}>
 			{/* Columna Principal - 70% */}
-			<div className="xl:col-span-7 space-y-8">
+			<div className="lg:col-span-7 space-y-8">
 				{/* Hero Banner */}
 				<HeroBanner
 					userProfile={userProfile}
@@ -295,7 +294,7 @@ export default function MainDashboardView({
 			</div>
 
 			{/* Sidebar Derecha - 30% */}
-			<div className="xl:col-span-3 space-y-6">
+			<div className="lg:col-span-3 space-y-6">
 				{/* Mis Mascotas */}
 				<MyPetsSection
 					userPets={userPets}

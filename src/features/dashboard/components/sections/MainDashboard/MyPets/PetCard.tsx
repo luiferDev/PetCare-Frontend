@@ -24,7 +24,7 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onClick, className = '' }) => {
 			onClick={handleClick}
 			className={`
         w-full flex items-center gap-4 p-4 rounded-xl 
-        hover:bg-gray-50 transition-all duration-200 text-left group
+        hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 text-left group
         focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2
         ${className}`}
 		>
@@ -36,7 +36,7 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onClick, className = '' }) => {
 				/>
 
 				{/* Indicador de estado activo */}
-				{pet.active && (
+				{pet.isActive && (
 					<div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
 						<div className="w-2 h-2 bg-white rounded-full"></div>
 					</div>
@@ -44,11 +44,11 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onClick, className = '' }) => {
 			</div>
 
 			<div className="flex-1 min-w-0">
-				<p className="font-bold text-gray-900 truncate">{pet.name}</p>
-				<p className="text-sm text-gray-600 truncate">
+				<p className="font-bold text-gray-900 dark:text-white truncate">{pet.name}</p>
+				<p className="text-sm text-gray-600 dark:text-gray-400 truncate">
 					{pet.breed || pet.species}
 				</p>
-				<p className="text-xs text-gray-500">
+				<p className="text-xs text-gray-500 dark:text-gray-500">
 					{pet.age} año{pet.age !== 1 ? 's' : ''} • {pet.species}
 				</p>
 			</div>

@@ -1,9 +1,17 @@
 // src/services/dashboardService.ts
+
+import { Bone, Home, Wind } from 'lucide-react';
 import type { DashboardData, Pet } from '@/types/dashboardData';
+import { getBookingById, getBookingsByUser } from './bookingService';
+
+import { BookingStatus } from '@/features/booking/types';
+import type { CaretakerDashboardData } from '@/features/caregiver/types/index';
 import type { DashboardStatsData } from '@/types/DashboardStatsData';
 import type { PetSummaryResponse } from '@/types/pets';
+import { Role } from '@/types/authStore';
 import axios from '@/services/auth';
 import { getMockDashboardData } from './mockDashboardService';
+import { getServicesBySitterForDashboard } from './sitterService';
 
 const API_URL = '/api/dashboard';
 
@@ -30,26 +38,15 @@ export const getDashboardData = async (): Promise<DashboardData> => {
         console.log('🔄 Iniciando carga de datos del dashboard...');
         console.log('📡 API URL:', import.meta.env.VITE_API_URL);
         
-        const [statsResponse, mainResponse, petsResponse, sittersResponse] = await Promise.all([
+        const [statsResponse, mainResponse, sittersResponse] = await Promise.all([
             axios.get<DashboardStatsData>(`${API_URL}/stats`),
             axios.get(`${API_URL}/main`),
-            axios.get<PetSummaryResponse[]>('/api/pets/summary'),
             axios.get(`${API_URL}/sitter-profiles`)
         ]);
 
-        const userPets = petsResponse.data
-            .filter((pet: PetSummaryResponse) => pet.active)
-            .map((pet: PetSummaryResponse) => ({
-                id: pet.id,
-                accountId: pet.accountId,
-                accountName: pet.accountName,
-                name: pet.name,
-                species: pet.species,
-                breed: pet.breed,
-                age: pet.age,
-                createdAt: pet.createdAt,
-                active: pet.active
-            }));
+        // Pets se obtienen via el store/PetStore con /api/pets/account/{accountId}/active
+        // No se llama aquí para evitar redundancia — el MainDashboard los lee del store
+        const userPets: Pet[] = [];
         
         console.log('✅ Datos del dashboard cargados correctamente');
         return {
@@ -95,9 +92,10 @@ export const getRecentSitters = async () => {
     return recentSitters;
 };
 
-export const getPetsSummary = async (): Promise<PetSummaryResponse[]> => {
+// NOTE: /api/pets/summary does not exist — use PetStore which calls /api/pets/account/{accountId}/active
+export const getPetsSummary = async (accountId: number): Promise<PetSummaryResponse[]> => {
     try {
-        const response = await axios.get<PetSummaryResponse[]>('/api/pets/summary');
+        const response = await axios.get<PetSummaryResponse[]>(`/api/pets/account/${accountId}/active`);
         return response.data;
     } catch (error) {
         console.error('Error fetching pets summary:', error);
@@ -105,3 +103,57 @@ export const getPetsSummary = async (): Promise<PetSummaryResponse[]> => {
     }
 };
 
+/**
+ * Obtiene y ensambla todos los datos para el dashboard del cuidador de forma robusta.
+ * @param userId - El ID del usuario cuidador.
+ * @returns Una promesa con los datos del dashboard.
+ */
+export const getSitterDashboardData = async (userId: number): Promise<CaretakerDashboardData> => {
+  try {
+    const [pendingBookings, confirmedBookings, sitterServices] = await Promise.all([
+      getBookingsByUser(userId, Role.SITTER, { status: BookingStatus.PENDING }),
+      getBookingsByUser(userId, Role.SITTER, { status: BookingStatus.CONFIRMED }),
+      getServicesBySitterForDashboard(userId) // Usamos la nueva función segura
+    ]);
+
+    // --- CORRECCIÓN CLAVE PARA EVITAR EL ERROR '.map' ---
+    // Si la API no devuelve la estructura esperada, usamos un array vacío como fallback.
+    const pendingBookingsContent = pendingBookings?.content ?? [];
+    const confirmedBookingsContent = confirmedBookings?.content ?? [];
+
+    const pendingDetailsPromises = pendingBookingsContent.map(booking => getBookingById(booking.id));
+    const confirmedDetailsPromises = confirmedBookingsContent.map(booking => getBookingById(booking.id));
+
+    const [pendingBookingsDetails, confirmedBookingsDetails] = await Promise.all([
+        Promise.all(pendingDetailsPromises),
+        Promise.all(confirmedDetailsPromises)
+    ]);
+
+    // El resto del mapeo ya está corregido y funcionará con estos datos seguros
+    const requests = pendingBookingsDetails.map(b => ({
+      id: b.id.toString(), petName: b.petName, ownerName: b.bookedByUserName,
+      dates: `${new Date(b.startTime).toLocaleDateString()} - ${new Date(b.endTime).toLocaleDateString()}`,
+      serviceType: b.serviceName, earnings: b.totalPrice, petAvatar: '🐾'
+    }));
+    const appointments = confirmedBookingsDetails.map(b => ({
+      id: b.id.toString(), petName: b.petName, service: b.serviceName,
+      time: `Confirmada para: ${new Date(b.startTime).toLocaleDateString()}`, petAvatar: '🐶'
+    }));
+    const services = sitterServices.map(s => ({
+        id: s.id.toString(), title: s.serviceType, price: `$${s.price}/${s.serviceType === 'HOURLY' ? 'hr' : 'día'}`,
+        icon: s.serviceType.toLowerCase().includes('paseo') ? Wind : (s.serviceType.toLowerCase().includes('alojamiento') ? Home : Bone)
+    }));
+    const stats = {
+        pendingRequests: pendingBookings?.totalElements ?? 0,
+        confirmedBookings: confirmedBookings?.totalElements ?? 0,
+        monthlyEarnings: confirmedBookingsContent.reduce((sum, b) => sum + b.totalPrice, 0),
+        averageRating: 4.9,
+    };
+
+    return { stats, requests, appointments, services };
+
+  } catch (error) {
+    console.error(`Error ensamblando los datos del dashboard para el cuidador ${userId}:`, error);
+    throw new Error('No se pudieron cargar los datos del dashboard');
+  }
+};

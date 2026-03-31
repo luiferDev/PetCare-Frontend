@@ -13,7 +13,7 @@ export default function SearchBar() {
 				placeholder="Buscar mascotas, citas, cuidadores..."
 				value={searchQuery}
 				onChange={(e) => setSearchQuery(e.target.value)}
-				className="pl-11 pr-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/20 focus:border-orange-500 transition-all duration-200 w-80 text-sm placeholder-gray-500"
+				className="pl-11 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/20 focus:border-orange-500 text-gray-900 dark:text-white transition-all duration-200 w-48 xl:w-80 text-sm placeholder-gray-500 dark:placeholder-gray-400"
 			/>
 			{searchQuery && (
 				<button

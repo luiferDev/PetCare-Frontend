@@ -32,7 +32,7 @@ export function LoginPage() {
 			setProfile(userProfile);
 			if (userProfile.role === Role.ADMIN) navigate('/AdminDashboard');
 			else if (userProfile.role === Role.SITTER)
-				navigate('/SitterDashboard');
+				navigate('/dashboard/sitter');
 			else if (userProfile.role === Role.CLIENT) navigate('/dashboard');
 		} catch (err) {
 			setError('Error al iniciar sesión. Verifica tus credenciales.');

@@ -17,7 +17,7 @@ export function ProfileDropDownButton({ onClick, showProfileMenu }: ProfileDropD
 	return (
 		<button
 			onClick={onClick}
-			className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-100 transition-all duration-200 group"
+			className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 group shrink-0"
 		>
 			<div
 				className={`w-10 h-10 bg-gradient-to-br ${getRoleColor(
@@ -28,20 +28,20 @@ export function ProfileDropDownButton({ onClick, showProfileMenu }: ProfileDropD
 					{isLoading ? '...' : user?.initials || '??'}
 				</span>
 			</div>
-			<div className="hidden sm:block text-left">
-				<p className="text-sm font-semibold text-gray-900">
+			<div className="hidden xl:block text-left overflow-hidden">
+				<p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate max-w-[140px]">
 					{isLoading
 						? '...'
 						: user
 						? `${user.firstName} ${user.lastName}`
 						: 'Usuario'}
 				</p>
-				<p className="text-xs text-gray-500 capitalize">
+				<p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
 					{user?.role?.toLowerCase() || 'cliente'}
 				</p>
 			</div>
 			<ChevronDown
-				className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+				className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform duration-200 ${
 					showProfileMenu ? 'rotate-180' : ''
 				}`}
 			/>

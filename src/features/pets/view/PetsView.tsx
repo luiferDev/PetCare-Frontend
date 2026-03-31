@@ -12,14 +12,14 @@ export function PetsViewContent() {
 	const user = useAuthStore((state) => state.profile);
 
 	useEffect(() => {
-		if (user?.id && isLoading) {
-			loadPets(user.id);
+		if (user?.accountId && isLoading) {
+			loadPets(user.accountId);
 		}
 	}, [user, isLoading, loadPets]);
 
 	if (!user) {
 		return (
-			<div className="...">
+			<div className="text-gray-600 dark:text-gray-400">
 				Por favor, inicia sesión para ver tus mascotas.
 			</div>
 		);
@@ -29,10 +29,10 @@ export function PetsViewContent() {
 	return (
 		<div className="container mx-auto p-4 md:p-8">
 			<header className="mb-8">
-				<h1 className="text-3xl font-bold text-gray-900 mb-2">
+				<h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
 					Mis Mascotas
 				</h1>
-				<p className="text-gray-600">
+				<p className="text-gray-600 dark:text-gray-400">
 					Gestiona la información y cuidado de tus compañeros peludos.
 				</p>
 			</header>

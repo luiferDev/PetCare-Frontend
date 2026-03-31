@@ -21,14 +21,14 @@ export function BookingsViewContent() {
 
 
     if (!user) {
-        return <div className="...">Por favor, inicia sesión para ver tus citas.</div>;
+        return <div className="text-gray-600 dark:text-gray-400">Por favor, inicia sesión para ver tus citas.</div>;
     }
 
     return (
         <div className="container mx-auto">
             <header className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900">Mis Citas</h1>
-                <p className="text-gray-600">Aquí puedes ver y gestionar todas tus reservas.</p>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Mis Citas</h1>
+                <p className="text-gray-600 dark:text-gray-400">Aquí puedes ver y gestionar todas tus reservas.</p>
             </header>
             <main>
                 <BookingsOverview />

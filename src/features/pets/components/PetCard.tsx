@@ -59,8 +59,8 @@ const PetInfo: React.FC<{ pet: Pet; variant: 'compact' | 'default' | 'detailed' 
     if (variant === 'compact') {
         return (
             <>
-                <h4 className="font-medium text-gray-900 truncate">{pet.name}</h4>
-                <p className="text-sm text-gray-500">{pet.species} • {formatPetAge(pet.age)}</p>
+                <h4 className="font-medium text-gray-900 dark:text-white truncate">{pet.name}</h4>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{pet.species} • {formatPetAge(pet.age)}</p>
             </>
         );
     }
@@ -68,14 +68,14 @@ const PetInfo: React.FC<{ pet: Pet; variant: 'compact' | 'default' | 'detailed' 
     return (
         <>
             <div className="flex items-center gap-2 mb-1">
-                <h4 className="font-bold text-gray-900 truncate text-sm" title={pet.name}>{pet.name}</h4>
-                {!pet.active && <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Inactivo</span>}
+                <h4 className="font-bold text-gray-900 dark:text-white truncate text-sm" title={pet.name}>{pet.name}</h4>
+                {!pet.isActive && <span className="text-xs bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full">Inactivo</span>}
             </div>
             <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs text-orange-600 font-medium bg-orange-100 px-2 py-0.5 rounded-full">{pet.species || 'Sin especificar'}</span>
-                <span className="text-xs text-gray-500">{formatPetAge(pet.age)}</span>
+                <span className="text-xs text-orange-600 dark:text-orange-400 font-medium bg-orange-100 dark:bg-orange-500/20 px-2 py-0.5 rounded-full">{pet.species || 'Sin especificar'}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{formatPetAge(pet.age)}</span>
             </div>
-            <p className="text-xs text-gray-600 truncate" title={pet.breed}>{pet.breed || 'Mestizo'}</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 truncate" title={pet.breed}>{pet.breed || 'Mestizo'}</p>
             
             {/* Información adicional solo para la variante 'detailed' */}
             {variant === 'detailed' && (
@@ -121,8 +121,8 @@ const PetCardComponent: React.FC<PetCardProps> = ({
 
     // 3. CLASES CONDICIONALES: Centralizamos la lógica de estilos de las variantes.
     const containerClasses = variant === 'compact'
-        ? 'flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-100 hover:border-orange-200 hover:bg-orange-50'
-        : 'bg-gray-50 rounded-2xl p-4 hover:bg-orange-50 hover:border-orange-200 border border-transparent group';
+        ? 'flex items-center gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 hover:border-orange-200 dark:hover:border-orange-500/50 hover:bg-orange-50 dark:hover:bg-orange-500/10'
+        : 'bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-4 hover:bg-orange-50 dark:hover:bg-orange-500/10 hover:border-orange-200 dark:hover:border-orange-500/50 border border-transparent group';
     
     const contentWrapperClasses = variant === 'compact'
         ? 'flex items-center gap-3 w-full'

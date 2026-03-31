@@ -1,11 +1,10 @@
 // features/pets/components/states/PetsEmptyState.tsx
 
 import { Heart, Plus } from 'lucide-react';
-
-import { usePetsActions } from '../../hooks/usePetsActions';
+import { useNavigate } from 'react-router-dom';
 
 export function PetsEmptyState() {
-    const { showAddPetModal } = usePetsActions(); // Usamos la acción del hook
+    const navigate = useNavigate();
 
     return (
         <div className="text-center py-16">
@@ -19,7 +18,7 @@ export function PetsEmptyState() {
                 Registra a tu primer compañero para gestionar su cuidado, agendar citas y mucho más.
             </p>
             <button
-                onClick={showAddPetModal}
+                onClick={() => navigate('/dashboard/add-pet')}
                 className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 flex items-center gap-2 mx-auto"
             >
                 <Plus className="w-5 h-5" />
@@ -27,4 +26,4 @@ export function PetsEmptyState() {
             </button>
         </div>
     );
-}
+}

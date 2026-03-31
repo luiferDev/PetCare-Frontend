@@ -4,6 +4,8 @@ import React, { memo } from 'react';
 
 import type { Pet } from '@/features/pets/types';
 import { PetCard } from './PetCard';
+import { useNavigate } from 'react-router-dom';
+import { usePetsStore } from '../../../store/PetStore';
 
 // 1. LAS PROPS SE SIMPLIFICAN. Ya no necesita callbacks de eventos.
 interface PetsGridProps {
@@ -23,29 +25,32 @@ const PetsGridComponent: React.FC<PetsGridProps> = ({
     onViewAll,
     className = '',
 }) => {
+    const navigate = useNavigate();
+    const setSelectedPet = usePetsStore((state) => state.setSelectedPet);
+
     // 2. LA LÓGICA DERIVADA SE MANTIENE. Es correcta.
     const petsToShow = maxItems ? pets.slice(0, maxItems) : pets;
     const hasMorePets = !!(maxItems && pets.length > maxItems);
 
-    // 3. SE ELIMINA TODA LA LÓGICA DE NEGOCIO Y MANEJADORES DE EVENTOS.
-    //    - `favoritePetId` se elimina.
-    //    - `handlePetClick` y `handleMenuClick` se eliminan.
+    const handlePetClick = (pet: Pet) => {
+        setSelectedPet(pet);
+        navigate(`/dashboard/pets/${pet.id}`);
+    };
 
     // 4. CLASES CONDICIONALES PARA EVITAR DUPLICACIÓN DE CÓDIGO.
     const containerClasses = variant === 'grid'
-        ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'
+        ? 'grid grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-4'
         : 'space-y-2';
 
     return (
         <div className={className}>
             <div className={containerClasses}>
                 {petsToShow.map((pet) => (
-                    // PetCard ahora manejará sus propias acciones.
-                    // No necesita `onClick` ni `onMenuClick`.
                     <PetCard
                         key={pet.id}
                         pet={pet}
                         variant={variant === 'grid' ? 'default' : 'compact'}
+                        onClick={handlePetClick}
                     />
                 ))}
             </div>

@@ -330,3 +330,21 @@ export async function addMyService(
 	);
 	return response.data;
 }
+
+/**
+ * NUEVA FUNCIÓN PARA EL DASHBOARD DEL CUIDADOR.
+ * Obtiene los servicios de un cuidador usando el endpoint correcto "/all/".
+ * @param sitterId El ID del usuario cuidador.
+ * @returns Una promesa con la lista de servicios del cuidador.
+ */
+export const getServicesBySitterForDashboard = async (sitterId: number): Promise<ServiceOffering[]> => {
+    try {
+        // Usamos la URL correcta del backend: /api/services/all/{id}
+        const response = await axios.get<ServiceOffering[]>(`/api/services/all/${sitterId}`);
+		console.log(response.data);
+        return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+        console.error(`Error fetching dashboard services for sitter ${sitterId}:`, error);
+        return []; 
+    }
+};

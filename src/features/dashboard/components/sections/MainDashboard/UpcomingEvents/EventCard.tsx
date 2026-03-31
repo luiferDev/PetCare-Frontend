@@ -33,44 +33,44 @@ const colorClasses: Record<UpcomingEvent['color'], {
 }> = {
   orange: {
     bg: 'bg-orange-500',
-    text: 'text-orange-900',
-    highlight: 'bg-orange-50',
-    border: 'border-orange-100',
+    text: 'text-orange-900 dark:text-orange-400',
+    highlight: 'bg-orange-50 dark:bg-orange-500/10',
+    border: 'border-orange-100 dark:border-orange-500/20',
     indicator: 'bg-orange-500'
   },
   blue: {
     bg: 'bg-blue-500',
-    text: 'text-blue-900',
-    highlight: 'bg-blue-50',
-    border: 'border-blue-100',
+    text: 'text-blue-900 dark:text-blue-400',
+    highlight: 'bg-blue-50 dark:bg-blue-500/10',
+    border: 'border-blue-100 dark:border-blue-500/20',
     indicator: 'bg-blue-500'
   },
   green: {
     bg: 'bg-green-500',
-    text: 'text-green-900',
-    highlight: 'bg-green-50',
-    border: 'border-green-100',
+    text: 'text-green-900 dark:text-green-400',
+    highlight: 'bg-green-50 dark:bg-green-500/10',
+    border: 'border-green-100 dark:border-green-500/20',
     indicator: 'bg-green-500'
   },
   purple: {
     bg: 'bg-purple-500',
-    text: 'text-purple-900',
-    highlight: 'bg-purple-50',
-    border: 'border-purple-100',
+    text: 'text-purple-900 dark:text-purple-400',
+    highlight: 'bg-purple-50 dark:bg-purple-500/10',
+    border: 'border-purple-100 dark:border-purple-500/20',
     indicator: 'bg-purple-500'
   },
   red: {
     bg: 'bg-red-500',
-    text: 'text-red-900',
-    highlight: 'bg-red-50',
-    border: 'border-red-100',
+    text: 'text-red-900 dark:text-red-400',
+    highlight: 'bg-red-50 dark:bg-red-500/10',
+    border: 'border-red-100 dark:border-red-500/20',
     indicator: 'bg-red-500'
   },
   yellow: {
     bg: 'bg-yellow-500',
-    text: 'text-yellow-900',
-    highlight: 'bg-yellow-50',
-    border: 'border-yellow-100',
+    text: 'text-yellow-900 dark:text-yellow-400',
+    highlight: 'bg-yellow-50 dark:bg-yellow-500/10',
+    border: 'border-yellow-100 dark:border-yellow-500/20',
     indicator: 'bg-yellow-500'
   }
 };
@@ -100,7 +100,7 @@ const EventCard: React.FC<EventCardProps> = ({
         transition-all duration-200 group
         ${isHighlighted 
           ? `${colors.highlight} border ${colors.border} shadow-sm` 
-          : 'hover:bg-gray-50 border border-transparent'
+          : 'hover:bg-gray-50 dark:hover:bg-gray-700/50 border border-transparent'
         }
         ${isUrgent ? 'ring-1 ring-red-200 shadow-sm' : ''}
         focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2
@@ -128,7 +128,7 @@ const EventCard: React.FC<EventCardProps> = ({
         <div className="flex items-center gap-2 mb-1">
           <p className={`
             font-bold truncate text-base
-            ${isHighlighted ? colors.text : 'text-gray-900'}
+            ${isHighlighted ? colors.text : 'text-gray-900 dark:text-white'}
           `}>
             {event.title}
           </p>
@@ -141,7 +141,7 @@ const EventCard: React.FC<EventCardProps> = ({
         
         <p className={`
           text-sm truncate
-          ${isHighlighted ? `${colors.text} opacity-70` : 'text-gray-600'}
+          ${isHighlighted ? `${colors.text} opacity-70` : 'text-gray-600 dark:text-gray-400'}
         `}>
           {event.subtitle}
         </p>
@@ -149,15 +149,15 @@ const EventCard: React.FC<EventCardProps> = ({
         {/* Información de fecha y hora */}
         <div className="flex items-center gap-2 mt-2">
           <div className="flex items-center gap-1">
-            <Calendar className="w-3 h-3 text-gray-400" />
-            <span className="text-xs text-gray-500 font-medium">
+            <Calendar className="w-3 h-3 text-gray-400 dark:text-gray-500" />
+            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
               {event.date}
             </span>
           </div>
           {event.time && (
             <div className="flex items-center gap-1">
-              <Clock className="w-3 h-3 text-gray-400" />
-              <span className="text-xs text-gray-500 font-medium">
+              <Clock className="w-3 h-3 text-gray-400 dark:text-gray-500" />
+              <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
                 {event.time}
               </span>
             </div>

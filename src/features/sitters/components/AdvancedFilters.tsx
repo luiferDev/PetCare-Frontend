@@ -44,15 +44,15 @@ export function AdvancedFilters({ onClose }: AdvancedFiltersProps) {
 
 	return (
 		<div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-			<div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
+			<div className="bg-white dark:bg-gray-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
 				{/* Header (sin cambios) */}
 				<div className="flex items-center justify-between mb-6">
-					<h3 className="text-xl font-bold text-gray-900">
+					<h3 className="text-xl font-bold text-gray-900 dark:text-white">
 						Filtros Avanzados
 					</h3>
 					<button
 						onClick={onClose}
-						className="p-2 text-gray-500 hover:bg-gray-100 rounded-full"
+						className="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
 					>
 						✕
 					</button>
@@ -62,7 +62,7 @@ export function AdvancedFilters({ onClose }: AdvancedFiltersProps) {
 				<div className="space-y-6">
 					{/* Distancia máxima */}
 					<div>
-						<label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+						<label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
 							<MapPin className="w-4 h-4" /> Distancia máxima
 						</label>
 						<div className="flex items-center gap-4">
@@ -82,7 +82,7 @@ export function AdvancedFilters({ onClose }: AdvancedFiltersProps) {
 								}
 								className="flex-1"
 							/>
-							<span className="text-sm font-medium w-16 text-gray-600">
+							<span className="text-sm font-medium w-16 text-gray-600 dark:text-gray-400">
 								{localFilters.maxDistance ||
 									SITTER_CONFIG.FILTERS.DEFAULT_RADIUS}{' '}
 								km
@@ -92,7 +92,7 @@ export function AdvancedFilters({ onClose }: AdvancedFiltersProps) {
 
 					{/* Tarifa máxima por hora */}
 					<div>
-						<label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+						<label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
 							<DollarSign className="w-4 h-4" /> Tarifa máxima por
 							hora
 						</label>
@@ -108,13 +108,13 @@ export function AdvancedFilters({ onClose }: AdvancedFiltersProps) {
 										: undefined
 								)
 							}
-							className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500"
+							className="w-full px-4 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-orange-500"
 						/>
 					</div>
 
 					{/* Calificación mínima */}
 					<div>
-						<label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+						<label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
 							<Star className="w-4 h-4" /> Calificación mínima
 						</label>
 						<div className="flex gap-2">
@@ -130,7 +130,7 @@ export function AdvancedFilters({ onClose }: AdvancedFiltersProps) {
 									className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${
 										(localFilters.minRating || 0) >= rating
 											? 'bg-yellow-500 text-white'
-											: 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+											: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
 									}`}
 								>
 									{rating} ★
@@ -141,7 +141,7 @@ export function AdvancedFilters({ onClose }: AdvancedFiltersProps) {
 
 					{/* Especialidades */}
 					<div>
-						<label className="text-sm font-medium text-gray-700 mb-2 block">
+						<label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">
 							Especialidades
 						</label>
 						<div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -159,7 +159,7 @@ export function AdvancedFilters({ onClose }: AdvancedFiltersProps) {
 									className={`px-3 py-2 rounded-lg text-sm text-left transition-colors ${
 										localFilters.specialty === specialty
 											? 'bg-orange-500 text-white font-semibold'
-											: 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+											: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
 									}`}
 								>
 									{specialty}
@@ -170,10 +170,10 @@ export function AdvancedFilters({ onClose }: AdvancedFiltersProps) {
 				</div>
 
 				{/* Acciones (la lógica ahora apunta a las acciones del contexto) */}
-				<div className="flex gap-3 mt-8 pt-6 border-t">
+				<div className="flex gap-3 mt-8 pt-6 border-t dark:border-gray-700">
 					<button
 						onClick={handleReset}
-						className="px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 font-medium"
+						className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 font-medium"
 					>
 						Limpiar Todo
 					</button>

@@ -37,10 +37,10 @@ const UpcomingEventsCalendar: React.FC<UpcomingEventsCalendarProps> = ({
   };
 
   return (
-    <div className={`bg-white rounded-2xl p-6 shadow-sm border border-gray-100 ${className}`}>
+    <div className={`bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 ${className}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-bold text-gray-900">Próximos Eventos</h3>
+        <h3 className="font-bold text-gray-900 dark:text-white">Próximos Eventos</h3>
         <button 
           onClick={handleViewCalendar}
           className="
@@ -67,8 +67,8 @@ const UpcomingEventsCalendar: React.FC<UpcomingEventsCalendarProps> = ({
         {/* Estado vacío */}
         {events.length === 0 && (
           <div className="text-center py-8">
-            <Calendar className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-            <p className="text-gray-500 mb-2">No hay eventos próximos</p>
+            <Calendar className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
+            <p className="text-gray-500 dark:text-gray-400 mb-2">No hay eventos próximos</p>
             <button
               onClick={handleViewCalendar}
               className="text-orange-600 hover:text-orange-700 text-sm font-medium"
@@ -81,8 +81,8 @@ const UpcomingEventsCalendar: React.FC<UpcomingEventsCalendarProps> = ({
 
       {/* Footer con más información */}
       {events.length > 0 && (
-        <div className="mt-4 pt-4 border-t border-gray-100">
-          <p className="text-xs text-gray-500 text-center">
+        <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+          <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
             Mostrando los próximos {events.length} eventos
           </p>
         </div>

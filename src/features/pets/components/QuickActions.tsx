@@ -3,13 +3,12 @@
 import { Calendar, Heart, Plus, Search, Settings } from 'lucide-react';
 
 import { useNavigate } from 'react-router';
-import { usePetsActions } from '@/features/pets/hooks/usePetsActions'; // Aún no hemos definido todas las acciones, pero lo usaremos conceptualmente
 
 // 1. LAS PROPS SE ELIMINAN. El componente ya no las necesita.
 export function QuickActions() {
     // 2. OBTENEMOS LAS ACCIONES Y NAVEGACIÓN DESDE HOOKS.
     const navigate = useNavigate();
-    const { showAddPetModal } = usePetsActions(); // Imaginemos que tenemos una acción para abrir el modal de "Añadir Mascota"
+
 
     // 3. EL ARRAY DE ACCIONES AHORA USA LAS FUNCIONES DE LOS HOOKS.
     //    Está completamente auto-contenido.
@@ -18,33 +17,31 @@ export function QuickActions() {
             icon: Plus,
             title: 'Agregar Mascota',
             description: 'Registra un nuevo compañero',
-            // La acción ahora viene de nuestro hook de acciones
-            onClick: showAddPetModal, 
+            onClick: () => navigate('/dashboard/add-pet'),
         },
         {
             icon: Calendar,
             title: 'Agendar Cita',
             description: 'Programa un servicio',
-            // La navegación se maneja localmente
-            onClick: () => navigate('/bookings/new'),
+            onClick: () => navigate('/dashboard/bookings/new'),
         },
         {
             icon: Search,
             title: 'Buscar Cuidadores',
             description: 'Encuentra el ideal',
-            onClick: () => navigate('/sitters/search'),
+            onClick: () => navigate('/dashboard/find-sitters'),
         },
         {
             icon: Heart,
             title: 'Chequeo de Salud',
             description: 'Revisar estado general',
-            onClick: () => navigate('/pets/health-check'), // Ejemplo de navegación
+            onClick: () => navigate('/dashboard/care'),
         },
         {
             icon: Settings,
             title: 'Configuración',
             description: 'Personalizar perfil',
-            onClick: () => navigate('/settings/pets'), // Ejemplo de navegación
+            onClick: () => navigate('/dashboard/settings'),
         }
     ];
 

@@ -28,33 +28,32 @@ const MyPetsSection: React.FC<MyPetsSectionProps> = ({
 
 	const handleAddPet = () => {
 		console.log('Navegando a agregar mascota...');
-		// Implementar navegación
-		navigate('/add-pet')
+		navigate('/dashboard/add-pet');
 	};
 
 	const handleViewAllPets = () => {
 		console.log('Navegando a ver todas las mascotas...');
-		// Implementar navegación
+		navigate('/dashboard/pets');
 	};
 
 	// Estado vacío - sin mascotas
 	if (!hasPets) {
 		return (
 			<div
-				className={`bg-white rounded-2xl p-6 shadow-sm border border-gray-100 ${className}`}
+				className={`bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 ${className}`}
 			>
 				<div className="flex items-center justify-between mb-6">
-					<h3 className="text-xl font-bold text-gray-900">
+					<h3 className="text-xl font-bold text-gray-900 dark:text-white">
 						Mis Mascotas
 					</h3>
-					<span className="text-sm font-semibold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">
+					<span className="text-sm font-semibold text-orange-600 bg-orange-100 dark:bg-orange-500/20 px-3 py-1 rounded-full">
 						0
 					</span>
 				</div>
 
 				<div className="text-center py-8">
-					<PawPrint className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-					<p className="text-gray-500 mb-4">
+					<PawPrint className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
+					<p className="text-gray-500 dark:text-gray-400 mb-4">
 						No tienes mascotas registradas
 					</p>
 					<button
@@ -71,13 +70,13 @@ const MyPetsSection: React.FC<MyPetsSectionProps> = ({
 	// Estado con mascotas
 	return (
 		<div
-			className={`bg-white rounded-2xl p-6 shadow-sm border border-gray-100 ${className}`}
+			className={`bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 ${className}`}
 		>
 			<div className="flex items-center justify-between mb-6">
-				<h3 className="text-xl font-bold text-gray-900">
+				<h3 className="text-xl font-bold text-gray-900 dark:text-white">
 					Mis Mascotas
 				</h3>
-				<span className="text-sm font-semibold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">
+				<span className="text-sm font-semibold text-orange-600 bg-orange-100 dark:bg-orange-500/20 px-3 py-1 rounded-full">
 					{userPets.length}
 				</span>
 			</div>
@@ -90,7 +89,7 @@ const MyPetsSection: React.FC<MyPetsSectionProps> = ({
 				{/* Botón para ver todas las mascotas */}
 				{hasMorePets && (
 					<button
-						className="w-full p-4 text-center text-orange-600 hover:bg-orange-50 rounded-xl transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+						className="w-full p-4 text-center text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-500/10 rounded-xl transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
 						onClick={handleViewAllPets}
 					>
 						Ver todas las mascotas ({userPets.length})
@@ -99,7 +98,7 @@ const MyPetsSection: React.FC<MyPetsSectionProps> = ({
 
 				{/* Botón para agregar nueva mascota */}
 				<button
-					className="w-full p-4 text-center text-gray-600 hover:bg-gray-50 rounded-xl transition-colors duration-200 font-medium border-2 border-dashed border-gray-200 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+					className="w-full p-4 text-center text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-colors duration-200 font-medium border-2 border-dashed border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
 					onClick={handleAddPet}
 				>
 					<div className="flex items-center justify-center gap-2">

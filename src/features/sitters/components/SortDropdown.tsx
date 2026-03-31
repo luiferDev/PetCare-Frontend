@@ -40,23 +40,23 @@ export function SortDropdown() {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl hover:bg-gray-50"
+                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700"
             >
-                <span className="text-sm text-gray-600">Ordenar por:</span>
-                <span className="text-sm font-medium text-gray-900">{currentSort.label}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">Ordenar por:</span>
+                <span className="text-sm font-medium text-gray-900 dark:text-white">{currentSort.label}</span>
                 <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {isOpen && (
-                <div className="absolute top-full right-0 mt-1 w-48 bg-white border rounded-xl shadow-lg z-10">
+                <div className="absolute top-full right-0 mt-1 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg z-10">
                     <div className="py-1">
                         {SITTER_CONFIG.SORT_OPTIONS.map((option) => (
                             <button
                                 key={option.key}
                                 onClick={() => handleSortChange(option)}
-                                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 flex items-center justify-between"
+                                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 dark:hover:bg-gray-700/50 flex items-center justify-between"
                             >
-                                <span className={currentSort.key === option.key ? 'font-medium text-orange-600' : 'text-gray-700'}>
+                                <span className={currentSort.key === option.key ? 'font-medium text-orange-600 dark:text-orange-400' : 'text-gray-700 dark:text-gray-300'}>
                                     {option.label}
                                 </span>
                                 {currentSort.key === option.key && (

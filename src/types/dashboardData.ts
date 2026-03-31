@@ -33,7 +33,7 @@ export interface Pet {
 	breed: string;
 	age: number;
 	createdAt: string;
-	active: boolean;
+	isActive: boolean;
 }
 
 export interface Sitter {

@@ -38,10 +38,10 @@ const AppointmentActions: React.FC<AppointmentActionsProps> = ({
   };
 
   return (
-    <div className={`flex gap-3 pt-4 border-t border-gray-100 ${className}`}>
+    <div className={`flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-100 dark:border-gray-700 ${className}`}>
       <button 
         onClick={handleContact}
-        className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+        className="flex-1 justify-center flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
       >
         <Phone className="w-4 h-4" />
         <span className="font-medium">Contactar</span>
@@ -49,7 +49,7 @@ const AppointmentActions: React.FC<AppointmentActionsProps> = ({
       
       <button 
         onClick={handleViewDetails}
-        className="flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+        className="flex-1 justify-center flex items-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
       >
         <MapPin className="w-4 h-4" />
         <span className="font-medium">Ver Detalles</span>
@@ -57,7 +57,7 @@ const AppointmentActions: React.FC<AppointmentActionsProps> = ({
       
       <button 
         onClick={handleReschedule}
-        className="flex items-center gap-2 px-6 py-3 border-2 border-gray-200 text-gray-700 rounded-xl hover:border-gray-300 hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+        className="flex-1 justify-center flex items-center gap-2 px-6 py-3 border-2 border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
       >
         <Calendar className="w-4 h-4" />
         <span className="font-medium">Reagendar</span>

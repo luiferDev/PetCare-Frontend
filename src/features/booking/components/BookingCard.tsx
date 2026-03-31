@@ -21,9 +21,9 @@ export function BookingCard({ booking }: { booking: BookingSummary }) {
 	const statusConfig = BOOKING_STATUS_CONFIG[booking.status];
 
 	return (
-		<div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
+		<div className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-300">
 			<div className="flex justify-between items-center mb-3">
-				<h3 className="font-bold text-lg text-gray-800">
+				<h3 className="font-bold text-lg text-gray-900 dark:text-white">
 					Cita de Cuidado
 				</h3>
 				<span
@@ -33,24 +33,24 @@ export function BookingCard({ booking }: { booking: BookingSummary }) {
 				</span>
 			</div>
 
-			<div className="space-y-3 text-sm text-gray-600">
+			<div className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
 				<div className="flex items-center gap-2">
 					<Dog className="w-4 h-4 text-orange-500" />
-					<span className="font-medium text-gray-800">
+					<span className="font-medium text-gray-900 dark:text-white">
 						{booking.petName}
 					</span>
 				</div>
 				<div className="flex items-center gap-2">
 					<User className="w-4 h-4 text-teal-500" />
-					<span>{booking.sitterName}</span>
+					<span className="text-gray-900 dark:text-white">{booking.sitterName}</span>
 				</div>
-				<div className="flex items-center gap-2 pt-2 border-t border-gray-100 mt-2">
+				<div className="flex items-center gap-2 pt-2 border-t border-gray-100 dark:border-gray-700 mt-2">
 					<Calendar className="w-4 h-4 text-gray-400" />
 					<span>{formatDateTime(booking.startTime)}</span>
 				</div>
 			</div>
 			<div className="text-right mt-4">
-				<p className="text-xl font-bold text-gray-800">
+				<p className="text-xl font-bold text-gray-900 dark:text-white">
 					${booking.totalPrice.toFixed(2)}
 				</p>
 			</div>

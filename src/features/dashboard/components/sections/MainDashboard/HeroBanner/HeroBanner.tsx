@@ -123,7 +123,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({
 				</div>
 
 				{/* Servicios Principales */}
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+				<div className="flex flex-col sm:flex-row flex-wrap gap-4">
 					{services.map((service) => (
 						<ServiceButton
 							key={service.id}
@@ -131,6 +131,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({
 							title={service.title}
 							subtitle={service.subtitle}
 							onClick={() => handleServiceClick(service.id)}
+                            className="flex-1 min-w-[200px]"
 						/>
 					))}
 				</div>

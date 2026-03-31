@@ -1,19 +1,14 @@
 // features/pets/components/profile/PetProfileTabs.tsx
 
-import { Activity, Calendar, Heart } from 'lucide-react';
+import { Activity, Calendar, Syringe } from 'lucide-react';
 import { useState } from 'react';
 
 import type { Pet } from '@/features/pets/types';
 import { PetAppointmentsTab } from './PetAppointmentsTab';
 import { PetMedicalTab } from './PetMedicalTab';
-
-// Importamos los componentes de contenido que creamos para cada pestaña
-
-
-// import { PetVaccinationsTab } from './PetVaccinationsTab'; // (Crearíamos este siguiendo el mismo patrón)
+import { PetVaccinationsTab } from './PetVaccinationsTab';
 
 // 1. ARRAY DE CONFIGURACIÓN
-// Define todo lo que necesitamos para cada pestaña en un solo lugar.
 const TABS_CONFIG = [
     {
         id: 'medical',
@@ -30,9 +25,8 @@ const TABS_CONFIG = [
     {
         id: 'vaccines',
         label: 'Vacunas',
-        icon: Heart,
-        // Component: PetVaccinationsTab, // Placeholder para el futuro componente de vacunas
-        Component: () => <div>Contenido de Vacunas Próximamente...</div>, // Placeholder
+        icon: Syringe,
+        Component: PetVaccinationsTab,
     },
 ];
 
