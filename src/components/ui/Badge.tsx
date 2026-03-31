@@ -1,28 +1,11 @@
 import * as React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-
-const badgeVariants = cva(
-    // Estilos base
-    'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
-    {
-        variants: {
-            variant: {
-                default: 'border-transparent bg-gray-800 text-white',
-                success: 'border-transparent bg-green-100 text-green-800',
-                warning: 'border-transparent bg-orange-100 text-orange-800',
-                destructive: 'border-transparent bg-red-100 text-red-800',
-            },
-        },
-        defaultVariants: {
-            variant: 'default',
-        },
-    }
-);
+import { badgeVariants, type BadgeVariant } from './badgeVariants';
 
 export interface BadgeProps
-    extends React.HTMLAttributes<HTMLDivElement>,
-        VariantProps<typeof badgeVariants> {}
+    extends React.HTMLAttributes<HTMLDivElement> {
+    variant?: BadgeVariant;
+}
 
 function Badge({ className, variant, ...props }: BadgeProps) {
     return (
@@ -30,4 +13,4 @@ function Badge({ className, variant, ...props }: BadgeProps) {
     );
 }
 
-export { Badge, badgeVariants };
+export { Badge };

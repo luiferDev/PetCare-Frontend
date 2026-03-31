@@ -4,23 +4,20 @@ import { BookingsEmptyState } from '@/features/booking/components/states/Booking
 import { BookingsErrorState } from '@/features/booking/components/states/BookingErrorState';
 import { BookingsList } from './BookingList';
 import { BookingsLoadingState } from '@/features/booking/components/states/BookingsLoadingState';
-import { useAuthStore } from '@/store/AuthStore';
-import { useBookingStore } from '@/store/BookingStore';
+import { useBookingStore, type BookingState } from '@/store/BookingStore';
+import type { BookingSummary } from '@/features/booking/types';
 
 export function BookingsOverview() {
     // SEPARACIÓN CORRECTA: El estado y las acciones vienen de la store de Zustand.
-	const isLoading = useBookingStore((state: any) => state.isLoading)
-	const error = useBookingStore((state: any) => state.error)
-	const bookings = useBookingStore((state: any) => state.bookings)
-    const refreshBookings = useBookingStore((state: any) => state.refreshBookings); // Usamos refresh para el botón de reintento
-   	const user = useAuthStore((state) => state.profile); // Obtener el usuario autenticado
+	const isLoading = useBookingStore((state: BookingState) => state.isLoading)
+	const error = useBookingStore((state: BookingState) => state.error)
+	const bookings = useBookingStore((state: BookingState) => state.bookings) as unknown as BookingSummary[]
+    const refreshBookings = useBookingStore((state: BookingState) => state.refreshBookings);
 
     // EL useEffect PARA CARGAR DATOS SE HA ELIMINADO DE AQUÍ.
     
     const handleRetry = () => {
-        if (user?.id) {
-            refreshBookings(user.id);
-        }
+        refreshBookings();
     };
 
     const renderContent = () => {

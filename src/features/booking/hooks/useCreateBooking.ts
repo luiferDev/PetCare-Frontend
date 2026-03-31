@@ -54,7 +54,7 @@ export const useCreateBooking = () => {
 				if (preselectedSitterId) {
 					form.setValue('sitterId', preselectedSitterId);
 				}
-			} catch (error) {
+			} catch {
 				toast.error('Error al cargar los datos iniciales.');
 			} finally {
 				setLoading(false);

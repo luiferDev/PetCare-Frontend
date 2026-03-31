@@ -29,6 +29,6 @@ WORKDIR /app
 # Only copy the built artifacts from builder stage
 COPY --from=builder /app/dist ./dist
 
-EXPOSE 80
-
-CMD ["serve", "-s", "dist", "-l", "80"]
+# Port can be configured via PORT environment variable (defaults to 80)
+ENV PORT=80
+CMD ["serve", "-s", "dist", "-l", "$PORT"]

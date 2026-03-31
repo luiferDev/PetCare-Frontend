@@ -1,4 +1,4 @@
-import { useState, useEffect, type BaseSyntheticEvent } from 'react';
+import { useState, useEffect, useCallback, type BaseSyntheticEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send } from 'lucide-react';
 import { toast } from 'sonner';
@@ -22,7 +22,7 @@ export const CreateBookingView = () => {
 	const selectedSitterId = form.watch('sitterId');
 
 	// ✨ CORRECCIÓN: Función para manejar el cambio de cuidador
-	const handleSitterChange = async (sitterId: number) => {
+	const handleSitterChange = useCallback(async (sitterId: number) => {
 		if (!sitterId) {
 			setSitterServices([]);
 			form.setValue('serviceId', null);
@@ -34,13 +34,13 @@ export const CreateBookingView = () => {
 			const services = await getServicesBySitter(sitterId);
 			setSitterServices(Array.isArray(services) ? services : [services]);
 			form.setValue('serviceId', null);
-		} catch (error) {
+		} catch {
 			toast.error('No se pudieron cargar los servicios.');
 			setSitterServices([]);
 		} finally {
 			setIsLoadingServices(false);
 		}
-	};
+	}, [form]);
 
 	useEffect(() => {
 		if (selectedSitterId) {
@@ -48,7 +48,7 @@ export const CreateBookingView = () => {
 		} else {
 			setSitterServices([]);
 		}
-	}, [selectedSitterId]);
+	}, [selectedSitterId, handleSitterChange]);
 
 	const handleNext = () => setStep((s) => s + 1);
 	const handleBack = () => setStep((s) => s - 1);

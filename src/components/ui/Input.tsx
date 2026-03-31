@@ -5,9 +5,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 // CORRECCIÓN: Hacemos que `customProp` sea opcional añadiendo un '?'
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  customProp?: any; // O el tipo que corresponda, pero opcional.
-}
+type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {

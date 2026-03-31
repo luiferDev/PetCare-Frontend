@@ -56,13 +56,18 @@ const ServiceSelectionCard = ({
 );
 
 // Subcomponente para el selector de Fecha y Hora
+interface DateTimePickerProps {
+	field: {
+		value: Date | null;
+		onChange: (value: Date | null) => void;
+	};
+	disabledDateCheck: (date: Date) => boolean;
+}
+
 const DateTimePicker = ({
 	field,
 	disabledDateCheck,
-}: {
-	field: any;
-	disabledDateCheck: (date: Date) => boolean;
-}) => {
+}: DateTimePickerProps) => {
 	const selectedDate = field.value || new Date();
 
 	const handleTimeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -94,8 +99,10 @@ const DateTimePicker = ({
 				<PopoverContent className="w-auto p-0">
 					<Calendar
 						mode="single"
-						selected={field.value}
-						onSelect={field.onChange}
+						required={true}
+						selected={field.value ?? undefined}
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						onSelect={field.onChange as any}
 						initialFocus
 						disabled={disabledDateCheck}
 					/>

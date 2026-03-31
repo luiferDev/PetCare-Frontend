@@ -8,7 +8,7 @@ export interface Booking {
 	status: 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'CANCELLED';
 }
 
-interface BookingState {
+interface BookingState extends Record<string, unknown> {
 	bookings: Booking[];
     isLoading: boolean;
     error: string | null;
@@ -16,6 +16,8 @@ interface BookingState {
     loadBookings: () => Promise<void>;
     refreshBookings: () => Promise<void>;
 }
+
+export type { BookingState };
 
 export const useBookingStore = create<BookingState>((set, get) => ({
 	bookings: [
@@ -31,7 +33,7 @@ export const useBookingStore = create<BookingState>((set, get) => ({
             // Simulación
             await new Promise(resolve => setTimeout(resolve, 500));
             set({ isLoading: false });
-        } catch (err) {
+        } catch {
             set({ isLoading: false, error: 'Error al cargar reservas' });
         }
     },
