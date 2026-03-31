@@ -1,30 +1,34 @@
-# Use the official Node.js image as a base (latest LTS)
-FROM node:22-alpine
+# ============================================
+# Stage 1: Build
+# ============================================
+FROM node:22-alpine AS builder
 
-# Install pnpm globally
 RUN npm install -g pnpm
 
-# Set the working directory
 WORKDIR /app
 
-# Copy package.json and pnpm-lock.yaml to the working directory
-COPY package.json ./
-COPY pnpm-lock.yaml* ./
+# Copy dependency files first (layer caching)
+COPY package.json pnpm-lock.yaml ./
 
-# Install dependencies
 RUN pnpm install --frozen-lockfile
 
-# Copy the rest of the application code to the working directory
+# Copy source code
 COPY . .
 
-# Build the application
 RUN pnpm run build
 
-# Install serve to serve the built application
-RUN pnpm add -g serve
+# ============================================
+# Stage 2: Production (minimal image)
+# ============================================
+FROM node:22-alpine
 
-# Expose the port the app runs on
-EXPOSE 3000
+RUN npm install -g serve
 
-# Command to run the application
-CMD ["npx", "serve", "-s", "dist", "-l", "80"]
+WORKDIR /app
+
+# Only copy the built artifacts from builder stage
+COPY --from=builder /app/dist ./dist
+
+EXPOSE 80
+
+CMD ["serve", "-s", "dist", "-l", "80"]
