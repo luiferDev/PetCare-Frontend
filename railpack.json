@@ -1,0 +1,6 @@
+{
+  "nodeVersion": "22",
+  "spa": true,
+  "spaOutputDir": "dist",
+  "pruneDeps": true
+}
